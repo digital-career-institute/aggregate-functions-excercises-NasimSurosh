@@ -1,0 +1,23 @@
+
+
+select count(order_id) from orders;
+
+select count(order_id) from orders where ship_region is not null;
+
+select products.product_name from products
+group by product_name order by max(unit_price);
+
+select order_id, sum(unit_price * quantity) from order_details where order_id = 10258
+group by order_id;
+
+
+select product_name , min(unit_price) from products where product_id in(select product_id from order_details 
+where order_id =10263) group by product_name;
+
+select product_name, unit_price from products where unit_price > (select avg(unit_price) from products);
+
+select count(product_id) from products where category_id = (select category_id from categories where
+category_name = 'Seafood');
+
+select sum(unit_price * quantity) from order_details where order_id in (select order_id from orders where 
+order_date = '1996-01-01') and discount = 0;
